@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.light-theme {
+  --header-bg: #f4a6a6;   
+  --sidebar-bg: #cfeee6;  
+  --content-bg: #b8deeb; 
+  --card-bg: #ffffff;
+
+  --text-color: #2d3748;
+
+  --button-bg: #4f8ef7;
+  --button-hover: #3b7af0;
+}
+
+.dark-theme {
+--header-bg: #6b4f4f;
+--sidebar-bg: #314d4a;
+--content-bg: #3d5461;
+--card-bg: #5f6b85;
+
+--text-color: #f7fafc;
+--button-bg: #63b3ed;
+--button-hover: #4299e1;
+}
+
+.light-theme,
+.dark-theme {
+    min-height: 100vh;
+    background-color: var(--content-bg);
+    color: var(--text-color);
+}
+
+.light-theme {
+  --button-text: #1f2937;
+}
+
+.dark-theme {
+  --button-text: #1f2937;
+}
+
+.light-theme {
+  --text-color: #2d3748;
+  --price-color: #16a34a;
+}
+
+.dark-theme {
+  --text-color: #f8fafc;
+  --price-color: #facc15;
+}
+
+.main-content {
+  margin-left: 250px;
+
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+}

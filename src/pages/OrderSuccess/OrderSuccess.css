@@ -1,0 +1,73 @@
+.success-page {
+  max-width: 700px;
+
+  margin: 60px auto;
+  padding: 50px 40px;
+
+  text-align: center;
+
+  background: white;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.success-icon {
+  font-size: 80px;
+
+  margin-bottom: 20px;
+}
+
+.success-page h1 {
+  font-size: 36px;
+
+  margin-bottom: 15px;
+}
+
+.success-page p {
+  font-size: 18px;
+
+  line-height: 1.6;
+
+  margin-bottom: 30px;
+
+  opacity: 0.8;
+}
+
+.continue-shopping-btn {
+  display: inline-block;
+
+  padding: 14px 28px;
+
+  background: #2a7de1;
+
+  color: white;
+
+  text-decoration: none;
+
+  border-radius: 12px;
+
+  font-size: 18px;
+
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.continue-shopping-btn:hover {
+  transform: translateY(-2px);
+
+  background: #1565c0;
+}
+
+.dark-theme .success-page {
+  background: #5f6f86;
+  color: white;
+}
+
+.dark-theme .success-page h1,
+.dark-theme .success-page p {
+  color: white;
+}

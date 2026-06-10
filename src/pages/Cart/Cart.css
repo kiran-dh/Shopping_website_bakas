@@ -1,0 +1,143 @@
+.cart-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  padding: 20px;
+  margin-bottom: 20px;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.cart-image {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.cart-details {
+  flex: 1;
+}
+
+.cart-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.cart-price {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.cart-subtotal {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.quantity-btn {
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  background-color: #2563eb;
+  color: white;
+
+  transition: all 0.2s ease;
+}
+
+.quantity-btn:hover {
+  transform: scale(1.05);
+}
+
+.quantity {
+  min-width: 30px;
+
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.cart-total {
+  margin-top: 30px;
+  padding: 25px;
+
+  border-radius: 16px;
+
+  background-color: var(--card-bg);
+
+  color: var(--text-color);
+
+  font-size: 32px;
+  font-weight: 700;
+
+  text-align: right;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.empty-cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 60vh;
+
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #666;
+}
+
+.checkout-btn {
+  display: inline-block;
+
+  margin-top: 20px;
+  padding: 14px 24px;
+
+  background: var(--button-bg);
+  color: white;
+
+  text-decoration: none;
+
+  border-radius: 12px;
+
+  font-weight: 600;
+  font-size: 16px;
+
+  transition: 0.2s ease;
+}
+
+.checkout-btn:hover {
+  background: var(--button-hover);
+
+  transform: translateY(-2px);
+}

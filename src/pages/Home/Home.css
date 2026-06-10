@@ -1,0 +1,26 @@
+.home {
+  flex: 1;
+  padding: 40px;
+  background-color: var(--content-bg);
+  color: var(--text-color);
+}
+
+.products-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.filters {
+  display: flex;
+  gap: 16px;
+
+  width: fit-content;
+
+  padding: 16px 20px;
+
+  margin-bottom: 30px;
+
+  background: var(--card-bg);
+
+  border-radius: 16px;
+}
