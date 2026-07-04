@@ -74,9 +74,6 @@ function Home({searchText,setCartItems,handleAddToCart,ToggleWishList,wishList})
 
 
 
-
-
-
     if(isLoading) return <h1>Loading Content Please Wait....</h1>
 
     if(sortedList.length===0) return <h1>No Result Found</h1>

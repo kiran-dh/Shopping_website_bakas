@@ -23,9 +23,6 @@ function ProductDetails({handleAddToCart,ToggleWishList,wishList}) {
         fetchProduct();
     },[id])
 
-    console.log("wishList", wishList);
-console.log("product", product);
-
     const inWishList =
         wishList?.some(
             (item) => item?.id === product?.id
