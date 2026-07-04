@@ -1,0 +1,15 @@
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import dotenv from "dotenv";
+import { createClient } from "@supabase/supabase-js";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+dotenv.config({ path: resolve(__dirname, "../.env") });
+
+const supabase =createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_KEY
+);
+
+export default supabase
