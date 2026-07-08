@@ -1,6 +1,7 @@
 import "./Home.css"
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { useEffect, useState } from "react";
+import API_BASE_URL from "../../api/api.js";
 
 function Home({searchText,setCartItems,handleAddToCart,ToggleWishList,wishList}){
 
@@ -60,9 +61,9 @@ function Home({searchText,setCartItems,handleAddToCart,ToggleWishList,wishList})
   useEffect(()=>{
     const fetchProducts=async()=>{
       try {
-        const response = await fetch("https://dummyjson.com/products")
+        const response = await fetch(`${API_BASE_URL}/api/products`)
         const data = await response.json()
-        setProducts(data.products)
+        setProducts(data)
       } catch (error) {
         console.log("Error Fetching Data")
       } finally{

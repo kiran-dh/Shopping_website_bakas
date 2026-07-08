@@ -1,16 +1,25 @@
 import express from "express"
 import productRoutes from "./routes/productRoutes.js";
 import dotenv from "dotenv"
+import cors from "cors"
+
 
 dotenv.config();
 
+const Port=process.env.Port
+
 const app = express();
-const port=5000;
+
+app.use(
+    cors({
+        origin:"http://localhost:5173",
+    })
+);
 
 app.use(express.json());
 
 app.use("/api/products",productRoutes)
 
-app.listen(port,()=>{
-    console.log(`Server is running in port ${port}`)
+app.listen(Port,()=>{
+    console.log(`Server is running in port ${Port}`)
 })
