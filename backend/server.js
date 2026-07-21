@@ -2,6 +2,7 @@ import express from "express"
 import productRoutes from "./routes/productRoutes.js";
 import dotenv from "dotenv"
 import cors from "cors"
+import orderRoutes from "./routes/orders.js"
 
 
 dotenv.config();
@@ -19,6 +20,8 @@ app.use(
 app.use(express.json());
 
 app.use("/api/products",productRoutes)
+
+app.use("/api/orders",orderRoutes)
 
 app.listen(Port,()=>{
     console.log(`Server is running in port ${Port}`)
