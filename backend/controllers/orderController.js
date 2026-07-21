@@ -1,7 +1,9 @@
-import supabase from "../config/supabase";
+import supabase from "../config/supabase.js";
 
 export const createOrder =async(req,res)=>{
-    const {
+    try {
+
+        const {
         customer_name,
         email,
         phone,
@@ -29,7 +31,7 @@ export const createOrder =async(req,res)=>{
     for(const element of items){
         if((!element.product_id || element.price <=0 || element.quantity <=0)){
             return res.status(400).json({
-                message: "Order is not in acceptable format"
+                message: "Each item must contain a valid product_id, quantity and price."
             });
         }
     }
@@ -52,6 +54,12 @@ export const createOrder =async(req,res)=>{
         ])
         .select()
         .single();
+
+    if (error) {
+        return res.status(500).json({
+            message: "Failed to create order"
+        });
+    }
     
     const orderItems =items.map(item=>{
         return{
@@ -63,13 +71,36 @@ export const createOrder =async(req,res)=>{
     })
 
     const{error:orderItemsError}= await supabase
-        .from("order_item")
+        .from("order_items")
         .insert(orderItems)
+
+
+    if(orderItemsError){
+        console.error("Order items insert failed", orderItemsError)
+
+        const{error:deleteError}=await supabase
+            .from("orders")
+            .delete()
+            .eq("id",order.id)
+
+        if(deleteError){
+            console.error("Deletion of the faulty order failed",deleteError)
+        }
+
+        return res.status(500).json({
+            message:"Failed to create order items",
+            error: orderItemsError.message
+        })
+    }
+
 
     return res.status(201).json({
         message: "Order created successfully",
-        order
     });
 
-
+    } catch (error) {
+        return res.status(500).json({
+            message:"Internal Server Error"
+        })
+    }
 }
