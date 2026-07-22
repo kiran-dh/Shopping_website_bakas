@@ -29,16 +29,50 @@ export const createOrder =async(req,res)=>{
     }
 
     for(const element of items){
-        if((!element.product_id || element.price <=0 || element.quantity <=0)){
+        if((!element.product_id ||  element.quantity <=0)){
             return res.status(400).json({
-                message: "Each item must contain a valid product_id, quantity and price."
+                message: "Each item must contain a valid product_id and quantity."
             });
         }
     }
 
-    const total_price = items.reduce((sum,item)=>{
-        return sum+item.price*item.quantity;
-    },0)
+    const productIds =items.map(item=>{
+        return item.product_id
+    })
+
+    const {data :products ,error: productError}=await supabase
+        .from("products")
+        .select("*")
+        .in("id",productIds)
+
+    if(productError){
+        return res.status(500).json({
+            message:"Failed to find the products matching the item product_id",
+            error: productError.message
+        })
+    }
+
+    if (products.length !== items.length) {
+        return res.status(400).json({
+            message: "One or more products do not exist."
+        });
+    }
+
+
+    let total_price =0
+
+    for(const item of items){
+        const product =products.find(singleProduct=>{
+           return singleProduct.id===item.product_id
+        })
+        if (!product) {
+            return res.status(400).json({
+                message: `Product with id ${item.product_id} not found`
+            });
+        }
+
+        total_price += product.price * item.quantity
+    }
 
     const { data: order, error } = await supabase
         .from("orders")
@@ -60,15 +94,23 @@ export const createOrder =async(req,res)=>{
             message: "Failed to create order"
         });
     }
-    
-    const orderItems =items.map(item=>{
-        return{
+
+    const orderItems =[]
+
+    items.forEach(item=>{
+        const product =products.find(singleProduct=>{
+           return singleProduct.id===item.product_id
+        })
+
+         orderItems.push({
             order_id : order.id,
             product_id : item.product_id,
             quantity: item.quantity,
-            price: item.price
-        }
+            price: product.price
+        })
+        
     })
+
 
     const{error:orderItemsError}= await supabase
         .from("order_items")
@@ -99,6 +141,8 @@ export const createOrder =async(req,res)=>{
     });
 
     } catch (error) {
+
+        console.error(error)
         return res.status(500).json({
             message:"Internal Server Error"
         })
