@@ -148,3 +148,100 @@ export const createOrder =async(req,res)=>{
         })
     }
 }
+
+export const getOrders =async (req,res)=>{
+    const{data,error}=await supabase
+        .from("orders")
+        .select("*")
+    if(error){
+        return res.status(500).json({
+            message:error.message
+        })
+    }
+    return res.json(data)
+}
+export const getOrdersById =async (req,res)=>{
+    const orderId = req.orderId
+    const{data,error}=await supabase
+        .from("orders")
+        .select("*")
+        .eq("id",orderId)
+        .maybeSingle()
+    if(error){
+        return res.status(500).json({
+            message:error.message
+        })
+    }
+    if(!data){
+        return res.status(404).json({
+            message:"order not found"
+        })
+    }
+    return res.json(data)
+}
+
+export const updateOrdersById =async (req,res)=>{
+    const orderId =req.orderId
+    const {
+        customer_name,
+        email,
+        phone,
+        address,
+        status
+    } = req.body;
+
+
+    const {data,error}= await supabase
+        .from("orders")
+        .update({
+                customer_name,
+                email,
+                phone,
+                address,
+                status
+            }
+        )
+        .eq("id",orderId)
+        .select()
+        .maybeSingle()
+        
+        if(error){
+            return res.status(500).json({
+                message:error.message
+            })
+        }
+        if(!data){
+            return res.status(404).json({
+                message:"order not found"
+            })
+        }
+
+        return res.status(200).json(data)
+
+}
+
+export const deleteOrdersById=async (req,res)=>{
+    const orderId = req.orderId
+    const{data,error}=await supabase
+        .from("orders")
+        .delete()
+        .eq("id",orderId)
+        .select()
+        .maybeSingle()
+
+    if(error){
+        return res.status(500).json({
+            message:error.message
+        })
+    }
+    if(!data){
+        return res.status(404).json({
+            message:"order not found"
+        })
+    }
+
+    return res.status(200).json({
+        message: "order deleted successfully",
+        order: data
+    });
+}

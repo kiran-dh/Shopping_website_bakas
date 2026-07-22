@@ -11,7 +11,7 @@ router.get("/:id",parseProductId,getProductsById)
 
 router.post("/",createProducts)
 
-router.put("/:id",parseProductId,updateProductsById)
+router.patch("/:id",parseProductId,updateProductsById)
 
 router.delete("/:id",parseProductId,deleteProductsById)
 
