@@ -2,10 +2,16 @@ import express from "express"
 import { createOrder } from "../controllers/orderController.js"
 import parseOrderId from "../middleware/orderId.js"
 import { getOrders , getOrdersById, updateOrdersById , deleteOrdersById } from "../controllers/orderController.js"
+import { authenticateUser } from "../middleware/authenticateUser.js"
 
 const router =express.Router()
 
-router.post("/",parseOrderId,createOrder)
+router.get("/me", authenticateUser, (req, res) => {
+    console.log(req.user)
+    return res.json(req.user);
+});
+
+router.post("/",authenticateUser,parseOrderId,createOrder)
 
 router.get("/",getOrders)
 

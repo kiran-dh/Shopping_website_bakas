@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import {
     GoogleAuthProvider,
     signInWithPopup,
-    signOut
+    signOut,
 } from "firebase/auth";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -34,6 +34,17 @@ export function AuthProvider({ children }) {
             );
 
             setUser(result.user);
+
+            const idToken = await result.user.getIdToken();
+            
+            const response = await fetch("http://localhost:5000/api/orders/me", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${idToken}`,
+                },
+            });
+
+            console.log(await response.json());
 
         } catch (error) {
             console.log(error);

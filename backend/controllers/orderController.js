@@ -2,14 +2,13 @@ import supabase from "../config/supabase.js";
 
 export const createOrder =async(req,res)=>{
     try {
-
         const {
-        customer_name,
-        email,
-        phone,
-        address,
-        items
-    } = req.body;
+            customer_name,
+            email,
+            phone,
+            address,
+            items
+        } = req.body;
 
     if(
         !customer_name ||
