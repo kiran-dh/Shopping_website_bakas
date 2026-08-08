@@ -2,7 +2,7 @@ import "./ProductDetails.css"
 import { useParams } from "react-router-dom";
 import { useEffect , useState } from "react";
 import WishList from "../WishList/WishList";
-import API_BASE_URL from "../../api/api";
+import { api } from "../../api/api.js";
 
 function ProductDetails({handleAddToCart,ToggleWishList,wishList}) {
     const[product,setProduct]=useState(null)
@@ -12,8 +12,7 @@ function ProductDetails({handleAddToCart,ToggleWishList,wishList}) {
     useEffect(()=>{
         const fetchProduct =async()=>{
             try {
-                const response = await fetch(`${API_BASE_URL}/api/products/${id}`)
-                const data = await response.json();
+                const data = await api(`/products/${id}`)
                 setProduct(data)
             } catch (error) {
                 console.log("Error Fetching Data")
